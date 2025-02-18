@@ -14,6 +14,7 @@ import {
   ChevronLeft,
 } from "lucide-react";
 import { Button } from "./ui/button";
+import { ThemeToggle } from "./ThemeToggle";
 
 interface SidebarProps {
   open: boolean;
@@ -38,27 +39,30 @@ export const Sidebar = ({ open, onToggle }: SidebarProps) => {
   return (
     <aside
       className={cn(
-        "fixed top-0 left-0 h-screen bg-gradient-to-b from-brown-50 to-brown-100/50 border-r transition-all duration-300 ease-in-out z-30 backdrop-blur-sm",
+        "fixed top-0 left-0 h-screen bg-gradient-to-b from-background to-background/50 border-r transition-all duration-300 ease-in-out z-30 backdrop-blur-sm",
         open ? "w-64" : "w-20"
       )}
     >
-      <div className="flex items-center justify-between h-16 px-4 border-b border-brown-200/50">
-        <span className={cn("font-semibold text-xl text-brown-800", !open && "hidden")}>
+      <div className="flex items-center justify-between h-16 px-4 border-b">
+        <span className={cn("font-semibold text-xl text-foreground", !open && "hidden")}>
           Unolo
         </span>
-        <Button
-          variant="ghost"
-          size="icon"
-          onClick={onToggle}
-          className="hover:bg-brown-200/50 text-brown-700"
-        >
-          <ChevronLeft
-            className={cn(
-              "h-4 w-4 transition-transform",
-              !open && "rotate-180"
-            )}
-          />
-        </Button>
+        <div className="flex items-center gap-2">
+          <ThemeToggle />
+          <Button
+            variant="ghost"
+            size="icon"
+            onClick={onToggle}
+            className="hover:bg-accent/50"
+          >
+            <ChevronLeft
+              className={cn(
+                "h-4 w-4 transition-transform",
+                !open && "rotate-180"
+              )}
+            />
+          </Button>
+        </div>
       </div>
       <nav className="p-4">
         <ul className="space-y-2">
@@ -66,12 +70,12 @@ export const Sidebar = ({ open, onToggle }: SidebarProps) => {
             <li key={item.label}>
               <a
                 href={item.href}
-                className="flex items-center space-x-4 px-4 py-3 rounded-lg hover:bg-brown-200/50 transition-colors group"
+                className="flex items-center space-x-4 px-4 py-3 rounded-lg hover:bg-accent/50 transition-colors group"
               >
-                <item.icon className="h-5 w-5 text-brown-700 group-hover:text-brown-900" />
+                <item.icon className="h-5 w-5 text-foreground/70 group-hover:text-foreground" />
                 <span
                   className={cn(
-                    "text-brown-800 font-medium group-hover:text-brown-900",
+                    "text-foreground/70 font-medium group-hover:text-foreground",
                     !open && "hidden"
                   )}
                 >
