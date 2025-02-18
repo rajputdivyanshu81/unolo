@@ -19,9 +19,10 @@ import { ThemeToggle } from "./ThemeToggle";
 interface SidebarProps {
   open: boolean;
   onToggle: () => void;
+  className?: string;
 }
 
-export const Sidebar = ({ open, onToggle }: SidebarProps) => {
+export const Sidebar = ({ open, onToggle, className }: SidebarProps) => {
   const menuItems = [
     { icon: LayoutDashboard, label: "Dashboard", href: "/" },
     { icon: Users, label: "Attendance", href: "/attendance" },
@@ -39,8 +40,9 @@ export const Sidebar = ({ open, onToggle }: SidebarProps) => {
   return (
     <aside
       className={cn(
-        "fixed top-0 left-0 h-screen bg-gradient-to-b from-background to-background/50 border-r transition-all duration-300 ease-in-out z-30 backdrop-blur-sm",
-        open ? "w-64" : "w-20"
+        "fixed top-0 left-0 h-screen bg-gradient-to-b from-background to-background/50 border-r z-40 backdrop-blur-sm",
+        open ? "w-64" : "w-20",
+        className
       )}
     >
       <div className="flex items-center justify-between h-16 px-4 border-b">
@@ -53,7 +55,7 @@ export const Sidebar = ({ open, onToggle }: SidebarProps) => {
             variant="ghost"
             size="icon"
             onClick={onToggle}
-            className="hover:bg-accent/50"
+            className="hover:bg-accent/50 lg:flex hidden"
           >
             <ChevronLeft
               className={cn(
