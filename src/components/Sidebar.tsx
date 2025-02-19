@@ -46,6 +46,13 @@ export const Sidebar = ({ open, onToggle, className }: SidebarProps) => {
       )}
     >
       <div className="flex items-center justify-between h-16 px-4 border-b">
+        <span className="flex items-center gap-2">
+        <img 
+        src="/logo.png" 
+        alt="Unolo" 
+        className={cn("h-8 w-auto", !open && "hidden")}
+      />
+        </span>
         <span className={cn("font-semibold text-xl text-foreground", !open && "hidden")}>
           Unolo
         </span>
