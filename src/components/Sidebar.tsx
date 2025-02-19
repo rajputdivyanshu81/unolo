@@ -15,7 +15,8 @@ import {
 } from "lucide-react";
 import { Button } from "./ui/button";
 import { ThemeToggle } from "./ThemeToggle";
-
+import AttendanceView from "../pages/AttendanceView";
+import { useNavigate } from "react-router-dom";
 interface SidebarProps {
   open: boolean;
   onToggle: () => void;
@@ -23,9 +24,14 @@ interface SidebarProps {
 }
 
 export const Sidebar = ({ open, onToggle, className }: SidebarProps) => {
+  const navigate = useNavigate();
   const menuItems = [
     { icon: LayoutDashboard, label: "Dashboard", href: "/" },
-    { icon: Users, label: "Attendance", href: "/attendance" },
+    {  icon: Users,
+      label: "Attendance",
+      href: "/attendance",
+      onClick: () => navigate("/attendance"),
+    },
     { icon: CalendarDays, label: "Leaves", href: "/leaves" },
     { icon: Building2, label: "Organization", href: "/organization" },
     { icon: ClipboardList, label: "Tasks", href: "/tasks" },
@@ -46,7 +52,7 @@ export const Sidebar = ({ open, onToggle, className }: SidebarProps) => {
       )}
     >
       <div className="flex items-center justify-between h-16 px-4 border-b">
-        <span className="flex items-center gap-2">
+        <span className="flex items-center gap-0.5">
         <img 
         src="/logo.png" 
         alt="Unolo" 
@@ -75,8 +81,14 @@ export const Sidebar = ({ open, onToggle, className }: SidebarProps) => {
       </div>
       <nav className="p-4">
         <ul className="space-y-2">
-          {menuItems.map((item) => (
-            <li key={item.label}>
+          <div>
+          {menuItems.map((item,index) => (
+            <li key={index}
+            onClick={() => {
+              if (item.onClick) item.onClick(); // Trigger onClick if provided
+              else navigate(item.href); // Fallback to href navigation
+            }}
+            >
               <a
                 href={item.href}
                 className="flex items-center space-x-4 px-4 py-3 rounded-lg hover:bg-accent/50 transition-colors group"
@@ -93,6 +105,8 @@ export const Sidebar = ({ open, onToggle, className }: SidebarProps) => {
               </a>
             </li>
           ))}
+          </div>
+          
         </ul>
       </nav>
     </aside>
