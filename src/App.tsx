@@ -15,6 +15,7 @@ import LeavesView from "./pages/LeavesView";
 import TasksView from "./pages/TasksView";
 import OrderView from "./pages/OrderView";
 import OrganizationView from "./pages/OrganizationView";
+import { SignedIn, SignedOut, SignInButton, UserButton } from '@clerk/clerk-react'
 
 const router = createBrowserRouter([
   {
@@ -69,6 +70,7 @@ const router = createBrowserRouter([
 
 function App() {
   return (
+    
     <ThemeProvider defaultTheme="light" storageKey="vite-ui-theme">
       <RouterProvider router={router} />
       <Toaster />
