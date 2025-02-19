@@ -68,37 +68,39 @@ export const DashboardLayout = ({ children }: DashboardLayoutProps) => {
           sidebarOpen ? "lg:ml-64" : "lg:ml-20"
         )}>
           {/* Left side - Mobile Menu Button */}
-          <Button
-            variant="ghost"
-            size="icon"
-            className="lg:hidden"
-            onClick={toggleSidebar}
-          >
-            <Menu className="h-6 w-6" />
-          </Button>
+          <div className="flex items-center">
+            <Button
+              variant="ghost"
+              size="icon"
+              className="lg:hidden"
+              onClick={toggleSidebar}
+            >
+              <Menu className="h-6 w-6" />
+            </Button>
+          </div>
 
           {/* Right side - Notifications, Messages, and User */}
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-1 sm:gap-2">
             {/* Notifications */}
             <Button
               variant="ghost"
               size="icon"
-              className="relative"
+              className="relative hover:bg-accent/10 transition-colors duration-200"
               onClick={handleNotification}
             >
               <Bell className="h-5 w-5" />
-              <span className="absolute top-1.5 right-1.5 h-2 w-2 bg-red-500 rounded-full" />
+              <span className="absolute top-1.5 right-1.5 h-2 w-2 bg-red-500 rounded-full animate-pulse" />
             </Button>
 
             {/* Messages */}
             <Button
               variant="ghost"
               size="icon"
-              className="relative"
+              className="relative hover:bg-accent/10 transition-colors duration-200"
               onClick={handleMessage}
             >
               <MessageSquare className="h-5 w-5" />
-              <span className="absolute top-1.5 right-1.5 h-2 w-2 bg-red-500 rounded-full" />
+              <span className="absolute top-1.5 right-1.5 h-2 w-2 bg-red-500 rounded-full animate-pulse" />
             </Button>
 
             {/* User Profile */}
@@ -107,21 +109,21 @@ export const DashboardLayout = ({ children }: DashboardLayoutProps) => {
                 <Button
                   variant="ghost"
                   size="icon"
-                  className="relative h-8 w-8 rounded-full"
+                  className="relative h-8 w-8 rounded-full hover:bg-accent/10 transition-colors duration-200"
                 >
                   <div className="flex items-center justify-center h-full w-full bg-primary/10 rounded-full">
                     <User className="h-4 w-4" />
                   </div>
                 </Button>
               </DropdownMenuTrigger>
-              <DropdownMenuContent align="end" className="w-56">
+              <DropdownMenuContent align="end" className="w-56 mt-1">
                 <DropdownMenuLabel>My Account</DropdownMenuLabel>
                 <DropdownMenuSeparator />
-                <DropdownMenuItem>Profile</DropdownMenuItem>
-                <DropdownMenuItem>Settings</DropdownMenuItem>
-                <DropdownMenuItem>Help</DropdownMenuItem>
+                <DropdownMenuItem className="cursor-pointer">Profile</DropdownMenuItem>
+                <DropdownMenuItem className="cursor-pointer">Settings</DropdownMenuItem>
+                <DropdownMenuItem className="cursor-pointer">Help</DropdownMenuItem>
                 <DropdownMenuSeparator />
-                <DropdownMenuItem className="text-destructive">
+                <DropdownMenuItem className="text-destructive cursor-pointer">
                   Log out
                 </DropdownMenuItem>
               </DropdownMenuContent>
