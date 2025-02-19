@@ -3,7 +3,7 @@ import { ThemeProvider } from "@/components/theme-provider";
 import { Toaster } from "@/components/ui/toaster";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Index from "./pages/Index";
-import { NotFound } from "./pages/NotFound";
+import NotFound from "./pages/NotFound";
 import AttendanceView from "./pages/AttendanceView";
 
 const router = createBrowserRouter([
