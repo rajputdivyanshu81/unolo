@@ -1,8 +1,9 @@
-
 import { Card } from "@/components/ui/card";
 import { DashboardLayout } from "@/components/DashboardLayout";
 import { BarChart2, Camera, FileText, ShoppingCart, Users } from "lucide-react";
 import { BarChart, Bar, XAxis, YAxis, ResponsiveContainer, PieChart, Pie, Cell } from 'recharts';
+import { Link } from "react-router-dom";
+import { Button } from "@/components/ui/button";
 
 const Index = () => {
   const dailyData = [
@@ -49,6 +50,9 @@ const Index = () => {
             Realtime Dashboard
           </h1>
           <div className="flex flex-wrap gap-2 w-full sm:w-auto">
+            <Link to="/attendance">
+              <Button variant="outline">View Attendance Details</Button>
+            </Link>
             <select className="w-full sm:w-auto px-4 py-2 rounded-lg border bg-card hover:bg-accent/50 transition-colors">
               <option>Overview</option>
               <option>Live Location</option>
