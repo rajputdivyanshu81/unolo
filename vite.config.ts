@@ -11,12 +11,29 @@ export default defineConfig(({ mode }) => ({
   },
   plugins: [
     react(),
-    mode === 'development' &&
-    componentTagger(),
+    mode === "development" && componentTagger(),
   ].filter(Boolean),
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),
     },
+  },
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks(id) {
+          if (id.includes("node_modules")) {
+            if (id.includes("react")) {
+              return "react-vendors"; // Group React-related modules into a separate chunk
+            }
+            if (id.includes("lodash")) {
+              return "lodash"; // Group Lodash into its own chunk
+            }
+            return "vendor"; // Group other dependencies into a 'vendor' chunk
+          }
+        },
+      },
+    },
+    chunkSizeWarningLimit: 500, // Optional: Adjust the size limit for warnings
   },
 }));
