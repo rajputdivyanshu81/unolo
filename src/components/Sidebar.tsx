@@ -15,7 +15,6 @@ import {
 } from "lucide-react";
 import { Button } from "./ui/button";
 import { ThemeToggle } from "./ThemeToggle";
-import AttendanceView from "../pages/AttendanceView";
 import { useNavigate } from "react-router-dom";
 interface SidebarProps {
   open: boolean;
@@ -32,15 +31,40 @@ export const Sidebar = ({ open, onToggle, className }: SidebarProps) => {
       href: "/attendance",
       onClick: () => navigate("/attendance"),
     },
-    { icon: CalendarDays, label: "Leaves", href: "/leaves" },
-    { icon: Building2, label: "Organization", href: "/organization" },
-    { icon: ClipboardList, label: "Tasks", href: "/tasks" },
-    { icon: Target, label: "Targets", href: "/targets" },
-    { icon: FileText, label: "Form", href: "/form" },
-    { icon: ShoppingCart, label: "Order", href: "/order" },
-    { icon: DollarSign, label: "Expenses", href: "/expenses" },
-    { icon: Users, label: "Clients & Sites", href: "/clients" },
-    { icon: BarChart2, label: "Reports", href: "/reports" },
+    { icon: CalendarDays, label: "Leaves", 
+      href: "/leaves",
+      onClick : () => navigate("/leaves"),
+     },
+    { icon: Building2, label: "Organization",
+       href: "/organization",
+      onClick:() => navigate("/organization") },
+    { icon: ClipboardList, label: "Tasks",
+       href: "/tasks",
+      onClick: () => navigate("/tasks")
+     },
+    { icon: Target,
+       label: "Targets",
+        href: "/targets",
+        onClick: () => navigate("/targets"),
+    },
+    { icon: FileText, label: "Form", href: "/form",
+      onClick: () => navigate("/form")
+     },
+    { icon: ShoppingCart, label: "Order",
+       href: "/order",
+      onClick: () => navigate("/order") },
+    { icon: DollarSign, label: "Expenses",
+       href: "/expenses" ,
+       onClick: () =>navigate("/expenses")
+      },
+    { icon: Users, label: "Clients & Sites",
+       href: "/clients",
+       onClick: () => navigate("/clients")
+      },
+    { icon: BarChart2, label: "Reports",
+       href: "/reports",
+       onClick:()=>navigate("/reports"),
+     },
   ];
 
   return (
