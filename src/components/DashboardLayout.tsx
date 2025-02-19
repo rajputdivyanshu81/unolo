@@ -1,5 +1,5 @@
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Sidebar } from "./Sidebar";
 import { cn } from "@/lib/utils";
 import { Menu } from "lucide-react";
@@ -12,12 +12,26 @@ interface DashboardLayoutProps {
 export const DashboardLayout = ({ children }: DashboardLayoutProps) => {
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 1024);
+      if (window.innerWidth < 1024) {
+        setSidebarOpen(false);
+      }
+    };
+
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   const toggleSidebar = () => {
-    if (window.innerWidth >= 1024) {
-      setSidebarOpen(!sidebarOpen);
-    } else {
+    if (isMobile) {
       setMobileOpen(!mobileOpen);
+    } else {
+      setSidebarOpen(!sidebarOpen);
     }
   };
 
@@ -27,7 +41,7 @@ export const DashboardLayout = ({ children }: DashboardLayoutProps) => {
       <Button
         variant="ghost"
         size="icon"
-        className="lg:hidden fixed top-4 left-4 z-50"
+        className="lg:hidden fixed top-4 left-4 z-40"
         onClick={toggleSidebar}
       >
         <Menu className="h-6 w-6" />
@@ -36,18 +50,18 @@ export const DashboardLayout = ({ children }: DashboardLayoutProps) => {
       {/* Overlay for mobile */}
       {mobileOpen && (
         <div
-          className="fixed inset-0 bg-black/50 z-30 lg:hidden"
+          className="fixed inset-0 bg-black/50 z-40 lg:hidden"
           onClick={() => setMobileOpen(false)}
         />
       )}
 
       {/* Sidebar */}
       <Sidebar 
-        open={window.innerWidth >= 1024 ? sidebarOpen : mobileOpen} 
+        open={isMobile ? mobileOpen : sidebarOpen} 
         onToggle={toggleSidebar}
         className={cn(
-          "transition-transform duration-300 ease-in-out lg:translate-x-0",
-          !mobileOpen && "-translate-x-full lg:translate-x-0"
+          "transition-transform duration-300 ease-in-out lg:translate-x-0 z-50",
+          !mobileOpen && isMobile && "-translate-x-full"
         )}
       />
 
